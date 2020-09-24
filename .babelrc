@@ -6,13 +6,12 @@
         "debug": false,
         "loose": true,
         "modules": false,
-        "debug": true,
         "useBuiltIns": "entry",
         "corejs": 3,
         "targets": {
           "node": "current",
           "esmodules": true
-        },
+        }
       }
     ]
   ],
@@ -37,6 +36,6 @@
     ],
     [
       "@babel/plugin-proposal-class-properties"
-    ],
+    ]
   ]
 }
