@@ -1,0 +1,10 @@
+{
+"quokka": {
+    "pro": true,
+    "babel": true,
+    "plugins": "jsdom-quokka-plugin",
+    "jsdom": {
+      "file": "src/templates/index.html"
+      }
+  }
+}
