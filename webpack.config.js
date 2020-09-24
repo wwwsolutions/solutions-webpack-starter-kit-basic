@@ -21,8 +21,8 @@ const postCSSPlugins = [
 class RunAfterCompile {
   apply(compiler) {
     compiler.hooks.done.tap('Copy images', function () {
-      // fse.copySync('./src/assets/images', './dist/assets/images')
-      fse.copySync(paths.assets.images, paths.dist.images)
+      fse.copySync('./src/assets/images', './dist/assets/images')
+      // fse.copySync(paths.assets.images, paths.dist.images)
     })
   }
 }
@@ -56,7 +56,7 @@ let config = {
   // defaults to ./src
   // Here the application starts executing
   // and webpack starts bundling
-  entry: './src/app/index.js', // string | object | array
+  entry: './src/index.js', // string | object | array
   // entry: {
   //   // modernizr: [ paths.head.modernizr ],
   //   // vendor: [ paths.vendors.lazyloading, paths.vendors.picturefill, /* paths.vendors.ionicons */ ],
