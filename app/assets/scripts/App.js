@@ -1,5 +1,12 @@
-import '../styles/styles.css'
+// [PLUGINS]
+import '@babel/runtime/regenerator';
 import 'lazysizes'
+
+// [STYLES]
+import '../styles/styles.css'
+
+// [APPLICATION]
+// import './app/application';
 import MobileMenu from './modules/MobileMenu'
 import RevealOnScroll from './modules/RevealOnScroll'
 import StickyHeader from './modules/StickyHeader'
