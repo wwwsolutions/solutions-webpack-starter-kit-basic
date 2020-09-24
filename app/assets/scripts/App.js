@@ -1,6 +1,13 @@
 // [CORE.JS]
-import "core-js/modules/es.string.pad-start";
-import "core-js/modules/es.string.pad-end";
+// import "core-js/modules/es.array.unscopables.flat";
+// import "core-js/modules/es.array.unscopables.flat-map";
+// import "core-js/modules/esnext.math.clamp";
+// import "core-js/modules/esnext.math.deg-per-rad";
+// import "core-js/modules/esnext.math.degrees";
+// import "core-js/modules/esnext.math.fscale";
+// import "core-js/modules/esnext.math.rad-per-deg";
+// import "core-js/modules/esnext.math.radians";
+// import "core-js/modules/esnext.math.scale";
 
 // [BABEL]
 import '@babel/runtime/regenerator';
