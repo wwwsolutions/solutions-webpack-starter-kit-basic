@@ -9,14 +9,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fse = require('fs-extra')
 
-const postCSSPlugins = [
-  require('postcss-import'),
-  require('postcss-mixins'),
-  require('postcss-simple-vars'),
-  require('postcss-nested'),
-  require('postcss-hexrgba'),
-  require('autoprefixer')
-]
+
+// POSTCSS PLUGINS
+const postCSSPlugins = require('./build-utils/webpack/postcss-plugins/index')
+
+// const postCSSPlugins = [
+//   require('postcss-import'),
+//   require('postcss-mixins'),
+//   require('postcss-simple-vars'),
+//   require('postcss-nested'),
+//   require('postcss-hexrgba'),
+//   require('autoprefixer')
+// ]
 
 class RunAfterCompile {
   apply(compiler) {
