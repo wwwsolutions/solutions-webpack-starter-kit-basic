@@ -3,13 +3,16 @@
     [
       "@babel/preset-env",
       {
+        "debug": false,
         "loose": true,
         "modules": false,
         "debug": true,
-        "useBuiltIns": "usage",
+        "useBuiltIns": "entry",
+        "corejs": 3,
         "targets": {
-          "node": "current"
-        }
+          "node": "current",
+          "esmodules": true
+        },
       }
     ]
   ],

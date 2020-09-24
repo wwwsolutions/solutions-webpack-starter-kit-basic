@@ -1,15 +1,22 @@
-// [PLUGINS]
+// [CORE.JS]
+import "core-js/modules/es.string.pad-start";
+import "core-js/modules/es.string.pad-end";
+
+// [BABEL]
 import '@babel/runtime/regenerator';
+
+// [VENDORS]
 import 'lazysizes'
 
 // [STYLES]
 import '../styles/styles.css'
 
-// [APPLICATION]
-// import './app/application';
+// [APPLICATION MODULES]
 import MobileMenu from './modules/MobileMenu'
 import RevealOnScroll from './modules/RevealOnScroll'
 import StickyHeader from './modules/StickyHeader'
+
+// [CODE==========================================================]
 
 new StickyHeader()
 new RevealOnScroll(document.querySelectorAll(".feature-item"), 75)
