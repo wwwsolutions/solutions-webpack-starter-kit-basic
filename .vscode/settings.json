@@ -18,9 +18,5 @@
     "eslint.validate": [
         "javascript"
     ],
-    "files.autoSaveDelay": 500,
-    "cSpell.ignoreWords": [
-        "fscale",
-        "plugable"
-    ]
+    "files.autoSaveDelay": 500
 }

@@ -38,3 +38,11 @@ window.addEventListener('load', () => {
 
 }); // LOAD EVENT LISTENER
 
+
+
+
+
+// testing Quokka
+// https://github.com/wallabyjs/jsdom-quokka-plugin
+const testDiv = document.getElementById('testDiv');
+testDiv.textContent; //?
