@@ -7,9 +7,9 @@
 //////////////////////////////////////////////*/
 
 // [APPLICATION MODULES]
-import MobileMenu from './modules/MobileMenu'
-import RevealOnScroll from './modules/RevealOnScroll'
-import StickyHeader from './modules/StickyHeader'
+import MobileMenu from './modules/MobileMenu';
+import RevealOnScroll from './modules/RevealOnScroll';
+import StickyHeader from './modules/StickyHeader';
 
 
 /* APPLICATION INITIALIZATION
@@ -18,28 +18,28 @@ import StickyHeader from './modules/StickyHeader'
 
 window.addEventListener('load', () => {
 
-  new StickyHeader()
-  new RevealOnScroll(document.querySelectorAll(".feature-item"), 75)
-  new RevealOnScroll(document.querySelectorAll(".testimonial"), 60)
+  new StickyHeader();
+  new RevealOnScroll(document.querySelectorAll('.feature-item'), 75);
+  new RevealOnScroll(document.querySelectorAll('.testimonial'), 60);
   new MobileMenu();
-  let modal
+  let modal;
 
-  document.querySelectorAll(".open-modal").forEach(el => {
-    el.addEventListener("click", e => {
-      e.preventDefault()
-      if (typeof modal == "undefined") {
+  document.querySelectorAll('.open-modal').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      if (typeof modal == 'undefined') {
         import(/* webpackChunkName: "modal" */ './modules/Modal').then(x => {
-          modal = new x.default()
-          setTimeout(() => modal.openTheModal(), 20)
-        }).catch(() => console.log("There was a problem."))
+          modal = new x.default();
+          setTimeout(() => modal.openTheModal(), 20);
+        }).catch(() => console.log('There was a problem.'));
       } else {
-        modal.openTheModal()
+        modal.openTheModal();
       }
-    })
-  })
+    });
+  });
 
   if (module.hot) {
-    module.hot.accept()
+    module.hot.accept();
   }
 
   console.warn('\'application.js\' loaded.');

@@ -1,14 +1,15 @@
 const currentTask = process.env.npm_lifecycle_event;
-const fse = require('fs-extra')
+const fse = require('fs-extra');
+const util = require('util');
 
 // PATHS
-const paths = require('./build-utils/webpack/webpack.paths')
+const paths = require('./build-utils/webpack/webpack.paths');
 
 // PLUGINS
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const StyleLintPlugin = require('stylelint-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 // POSTCSS PLUGINS
@@ -19,14 +20,14 @@ const postCSSPlugins = [
   require('postcss-nested'),
   require('postcss-hexrgba'),
   require('autoprefixer')
-]
+];
 
 class RunAfterCompile {
   apply(compiler) {
     compiler.hooks.done.tap('Copy images', function () {
       // fse.copySync('./src/assets/images', './dist/assets/images')
-      fse.copySync(paths.assets.images, paths.dist.images)
-    })
+      fse.copySync(paths.assets.images, paths.dist.images);
+    });
   }
 }
 
@@ -43,20 +44,31 @@ let cssConfig = {
       }
     }
   ]
-}
+};
+
+let eslintConfig = {
+  test: /\.js$/,
+  enforce: 'pre',
+  exclude: /node_modules/,
+  use: {
+    loader: 'eslint-loader',
+  }
+};
+
 
 let pages = fse.readdirSync('src').filter(function (file) {
-  return file.endsWith('.html')
+  return file.endsWith('.html');
 }).map(function (page) {
   return new HtmlWebpackPlugin({
     filename: page,
     // template: `./src/${page}`
     template: `${paths.src}/${page}`
-  })
-})
+  });
+});
 
 
-// [COMMON CONFIG]
+// [COMMON CONFIG] -----------------------------------------------------------------------------------------------------------
+
 let config = {
 
   // defaults to ./src
@@ -75,10 +87,11 @@ let config = {
   module: {
     // rules for modules (configure loaders, parser options, etc.)    
     rules: [
-      cssConfig
+      cssConfig,
+      eslintConfig
     ]
   }
-}
+};
 
 // STYLE LINTING
 config.plugins.push(
@@ -86,17 +99,22 @@ config.plugins.push(
     configFile: '.stylelintrc',
     context: 'src/styles/',
     files: ['**/*.css'],
-    // syntax: 'css',
+    // syntax: 'scss',
     failOnError: false,
     quiet: false
-  }),
-)
+  })
+);
+
+// LOG COMMON CONFIG PLUGINS
+// console.log('config.plugins: ', util.inspect(config.plugins, false, null, true /* enable colors */));
 
 
-// [DEVELOPMENT MODE CONFIG]
+
+// [DEVELOPMENT MODE CONFIG] -----------------------------------------------------------------------------------------------------------
 if (currentTask == 'dev') {
 
-  cssConfig.use.unshift('style-loader')
+  // add loader to start of array
+  cssConfig.use.unshift('style-loader');
 
   // options related to how webpack emits results
   config.output = {
@@ -106,11 +124,11 @@ if (currentTask == 'dev') {
     // must be an absolute path (use the Node.js path module)    
     // path: path.resolve(__dirname, 'src')
     path: paths.dist.root,
-  }
+  };
 
   config.devServer = {
     before: function (app, server) {
-      server._watch(`${paths.src}/**/*.html`)
+      server._watch(`${paths.src}/**/*.html`);
     },
     // contentBase: path.join(__dirname, '../../src/app'), // boolean | string | array, static file location
     // contentBase: resolveAbs('./src'),
@@ -120,13 +138,17 @@ if (currentTask == 'dev') {
     port: 3000,
     host: '0.0.0.0',
     noInfo: false, // only errors & warns on hot reload
-  }
+  };
 
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  config.mode = 'development'
+  config.mode = 'development';
 }
 
-// [PRODUCTION MODE CONFIG]
+// LOG COMMON CONFIG PLUGINS
+console.log('config.plugins: ', util.inspect(config.plugins, false, null, true /* enable colors */));
+
+
+// [PRODUCTION MODE CONFIG] -----------------------------------------------------------------------------------------------------------
 if (currentTask == 'build') {
 
   // configuration regarding modules  
@@ -142,10 +164,13 @@ if (currentTask == 'build') {
       //   presets: ['@babel/preset-env']
       // }
     }
-  })
+  });
 
-  cssConfig.use.unshift(MiniCssExtractPlugin.loader)
-  postCSSPlugins.push(require('cssnano'))
+  // add loader to start of array
+  cssConfig.use.unshift(MiniCssExtractPlugin.loader);
+
+  // add plugin to end of postcss plugin array
+  postCSSPlugins.push(require('cssnano'));
 
   // options related to how webpack emits results
   config.output = {
@@ -161,19 +186,19 @@ if (currentTask == 'build') {
     filename: `${paths.dist.scripts}/[name].[hash:10].js`,
     chunkFilename: `${paths.dist.scripts}/[name].js`
 
-  }
+  };
 
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  config.mode = 'production'
+  config.mode = 'production';
   config.optimization = {
     splitChunks: { chunks: 'all' }
-  }
+  };
   config.plugins.push(
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(
       {
         // the filename template for entry chunks        
-        filename: `styles.[chunkhash].css`
+        filename: 'styles.[chunkhash].css'
       }
     ),
     // new StyleLintPlugin({
@@ -185,7 +210,7 @@ if (currentTask == 'build') {
     //   quiet: false
     // }),
     new RunAfterCompile()
-  )
+  );
 }
 
 module.exports = config;

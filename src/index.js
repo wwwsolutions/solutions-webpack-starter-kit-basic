@@ -13,10 +13,10 @@
 import '@babel/runtime/regenerator';
 
 // [VENDORS]
-import 'lazysizes'
+import 'lazysizes';
 
 // [STYLES]
-import './styles/styles.css'
+import './styles/styles.css';
 
 // [APPLICATION]
 import './app/application';
