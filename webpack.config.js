@@ -1,4 +1,4 @@
-const currentTask = process.env.npm_lifecycle_event
+const currentTask = process.env.npm_lifecycle_event;
 
 // PATHS
 const paths = require('./build-utils/webpack/webpack.paths')
@@ -6,21 +6,20 @@ const paths = require('./build-utils/webpack/webpack.paths')
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fse = require('fs-extra')
 
 
 // POSTCSS PLUGINS
-const postCSSPlugins = require('./build-utils/webpack/postcss-plugins/index')
-
-// const postCSSPlugins = [
-//   require('postcss-import'),
-//   require('postcss-mixins'),
-//   require('postcss-simple-vars'),
-//   require('postcss-nested'),
-//   require('postcss-hexrgba'),
-//   require('autoprefixer')
-// ]
+const postCSSPlugins = [
+  require('postcss-import'),
+  require('postcss-mixins'),
+  require('postcss-simple-vars'),
+  require('postcss-nested'),
+  require('postcss-hexrgba'),
+  require('autoprefixer')
+]
 
 class RunAfterCompile {
   apply(compiler) {
@@ -161,8 +160,16 @@ if (currentTask == 'build') {
         filename: `styles.[chunkhash].css`
       }
     ),
+    new StyleLintPlugin({
+      configFile: '.stylelintrc',
+      context: 'src/styles/',
+      files: ['**/*.css'],
+      // syntax: 'css',
+      failOnError: false,
+      quiet: false
+    }),
     new RunAfterCompile()
   )
 }
 
-module.exports = config
+module.exports = config;

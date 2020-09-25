@@ -10,6 +10,11 @@
     "files.associations": {
         "*.css": "scss"
     },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": true
+    },
+    "files.autoSaveDelay": 500,
     "cSpell.ignoreWords": [
         "fscale",
         "plugable"

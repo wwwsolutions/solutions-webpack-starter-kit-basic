@@ -21,7 +21,7 @@ import './styles/styles.css'
 // [APPLICATION]
 import './app/application';
 
-console.log('\'index.js\' loaded.');
+console.warn('\'index.js\' loaded.');
 
 // [MODULES]
 // import MobileMenu from './app/modules/MobileMenu'

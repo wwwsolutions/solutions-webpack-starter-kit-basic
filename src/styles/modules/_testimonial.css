@@ -1,5 +1,5 @@
 .testimonial {
-  background-color: rgba(255, 255, 255, .8);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 0 18px 1px 18px;
   margin-bottom: 98px;
 
@@ -20,7 +20,7 @@
     margin: 0 auto -80px auto;
     position: relative;
     top: -80px;
-    border: 6px solid rgba(255, 255, 255, .8);
+    border: 6px solid rgba(255, 255, 255, 0.8);
   }
 
   &__title {
@@ -36,6 +36,6 @@
     text-align: center;
     font-weight: 400;
     font-size: 0.9375rem;
-    margin: .25rem 0 1rem 0;
+    margin: 0.25rem 0 1rem 0;
   }
 }

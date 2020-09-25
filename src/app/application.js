@@ -1,6 +1,6 @@
 /* DOCUMENT INFORMATION
 
-  MAIN APLICATION.
+  MAIN APPLICATION.
   IMPORTS MODULES, 
   APPLICATION INITIALIZATION.
 
@@ -18,7 +18,7 @@ import StickyHeader from './modules/StickyHeader'
 
 window.addEventListener('load', () => {
 
-  console.log('\'application.js\' loaded.');
+  console.warn('\'application.js\' loaded.');
 
   new StickyHeader()
   new RevealOnScroll(document.querySelectorAll(".feature-item"), 75)

@@ -1,0 +1,16 @@
+node_modules/**
+build-utils/**
+dist/**
+src/app/**
+src/assets/**
+src/presets/**
+src/templates/**
+src/vendors/**
+
+src/styles/postcss/main.css
+src/styles/postcss/generated/**
+src/styles/postcss/grids/**
+src/styles/postcss/mixins/**
+src/styles/postcss/resets/**
+src/styles/postcss/utils/**
+src/styles/postcss/variables/**
