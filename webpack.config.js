@@ -77,13 +77,23 @@ let pages = fse.readdirSync('src').filter(function (file) {
 
 let config = {
 
-  // defaults to ./src
-  // Here the application starts executing
-  // and webpack starts bundling
-  // entry: `./src/index.js`, // string | object | array
   entry: {
-    app: [paths.entry.app],
+    // defaults to ./src
+    // Here the application starts executing
+    // and webpack starts bundling
+    // entry: `./src/index.js`, // string | object | array
+    app: [paths.entry.index],
+    // include modernizr into build
+    modernizr: [paths.head.modernizr],
+    // include vendors
+    vendor: [
+      paths.vendors.lazyloading,
+      paths.vendors.picturefill,
+      // paths.vendors.ionicons
+    ]
   },
+
+
   plugins: pages,
   // configuration regarding modules
   module: {
@@ -199,7 +209,8 @@ if (currentTask == 'build') {
     new MiniCssExtractPlugin(
       {
         // the filename template for entry chunks        
-        filename: 'styles.[chunkhash].css'
+        filename: `styles.[chunkhash].css`
+        // filename: `${paths.dist.stylesheets}/styles.[chunkhash].css`
       }
     ),
     new RunAfterCompile()
