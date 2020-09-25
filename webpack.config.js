@@ -145,7 +145,7 @@ if (currentTask == 'dev') {
 }
 
 // LOG COMMON CONFIG PLUGINS
-console.log('config.plugins: ', util.inspect(config.plugins, false, null, true /* enable colors */));
+// console.log('config.plugins: ', util.inspect(config.plugins, false, null, true /* enable colors */));
 
 
 // [PRODUCTION MODE CONFIG] -----------------------------------------------------------------------------------------------------------
