@@ -52,21 +52,26 @@ const paths = {
   dist: {
     root: resolveAbs('./dist'),
     scripts: './scripts',
-    stylesheets: './stylesheets',
-    fonts: './dist./assets/fonts',
-    images: './dist/assets/images',
-    sprites: './dist/assets/images/sprites'
-  },
-
-  dist: {
-    root: resolveAbs('./dist'),
+    stylesheets: './dist/stylesheets',
     audio: './dist/assets/audio',
     fonts: './dist/assets/fonts',
-    icons: './dist/assets/images/icons',
+    icons: './dist/assets/icons',
     images: './dist/assets/images',
-    sprites: './dist/assets/images/sprites',
+    sprites: './dist/assets/sprites',
     video: './dist/assets/video'
   },
+
+  // dist: {
+  //   root: resolveAbs('./dist'),
+  //   scripts: './scripts',
+  //   stylesheets: './stylesheets',
+  //   audio: './dist/assets/audio',
+  //   fonts: './dist/assets/fonts',
+  //   icons: './dist/assets/icons',
+  //   images: './dist/assets/images',
+  //   sprites: './dist/assets/sprites',
+  //   video: './dist/assets/video'
+  // },
 
   // dist: {
   //   root: resolveAbs('./dist'),

@@ -1,6 +1,6 @@
 const currentTask = process.env.npm_lifecycle_event;
 const fse = require('fs-extra');
-const util = require('util');
+const path = require('path');
 
 // PATHS
 const paths = require('./build-utils/webpack/webpack.paths');
@@ -10,7 +10,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 
 // POSTCSS PLUGINS
 const postCSSPlugins = [
@@ -26,7 +25,10 @@ class RunAfterCompile {
   apply(compiler) {
     compiler.hooks.done.tap('Copy images', function () {
       // fse.copySync('./src/assets/images', './dist/assets/images')
+      // copy images
       fse.copySync(paths.assets.images, paths.dist.images);
+      // copy icons
+      fse.copySync(paths.assets.icons, paths.dist.icons);
     });
   }
 }
@@ -98,10 +100,7 @@ let config = {
       cssConfig,
       eslintConfig
     ]
-  },
-
-  // enable devtools (sourcemaps)
-  devtool: 'source-map'
+  }
 
 };
 
@@ -126,12 +125,12 @@ if (currentTask == 'dev') {
 
   // options related to how webpack emits results
   config.output = {
-    filename: 'bundled.js',
+    filename: '[name].bundle.js',
 
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)    
-    // path: path.resolve(__dirname, 'src')
-    path: paths.dist.root,
+    path: path.resolve(__dirname, 'src')
+    // path: paths.dist.root,
   };
 
   config.devServer = {
@@ -150,10 +149,11 @@ if (currentTask == 'dev') {
 
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
   config.mode = 'development';
-}
 
-// LOG COMMON CONFIG PLUGINS
-// console.log('config.plugins: ', util.inspect(config.plugins, false, null, true /* enable colors */));
+  // set devtools
+  config.devtool = 'source-map';
+
+}
 
 
 // [PRODUCTION MODE CONFIG] -----------------------------------------------------------------------------------------------------------
