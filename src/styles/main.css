@@ -1,3 +1,17 @@
+/* OPTIONAL ///////////////////////////////////////////////////////////////////////////////////////////
+
+gulp task: sprites-generator (build-utils/gulp/tasks/task-sprites-generator)
+description:
+    Generates sprites and png for icons from
+
+/                                                                                                     /
+/  > GENERATED                                                                                        /
+/  [AUTOMATICALLY GENERATED STYLESHEETS FOR ICONS SPRITE VIA GULP TASK.]                              /
+/  GULP:SPRITES                                                                                       /
+/                                                                                                     /
+/////////////////////////////////////////////////////////////////////////////////////////////////////*/
+@import "generated/_sprite";
+
 @import "normalize.css";
 @import "base/_variables";
 @import "base/_mixins";
