@@ -50,10 +50,18 @@ let eslintConfig = {
   test: /\.js$/,
   enforce: 'pre',
   exclude: /node_modules/,
-  use: {
-    loader: 'eslint-loader',
-  }
+  use: ['eslint-loader'],
+
 };
+// let eslintConfig = {
+//   test: /\.js$/,
+//   enforce: 'pre',
+//   exclude: /node_modules/,
+//   use: {
+//     loader: 'eslint-loader',
+//   }
+// };
+
 
 
 let pages = fse.readdirSync('src').filter(function (file) {
@@ -90,7 +98,11 @@ let config = {
       cssConfig,
       eslintConfig
     ]
-  }
+  },
+
+  // enable devtools (sourcemaps)
+  devtool: 'source-map'
+
 };
 
 // STYLE LINTING
@@ -104,10 +116,6 @@ config.plugins.push(
     quiet: false
   })
 );
-
-// LOG COMMON CONFIG PLUGINS
-// console.log('config.plugins: ', util.inspect(config.plugins, false, null, true /* enable colors */));
-
 
 
 // [DEVELOPMENT MODE CONFIG] -----------------------------------------------------------------------------------------------------------
