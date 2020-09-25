@@ -1,3 +1,4 @@
+// UTILITIES
 const currentTask = process.env.npm_lifecycle_event;
 const fse = require('fs-extra');
 const path = require('path');
@@ -11,7 +12,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// POSTCSS PLUGINS
+
+// CONFIG
 const postCSSPlugins = [
   require('postcss-import'),
   require('postcss-mixins'),
@@ -21,10 +23,10 @@ const postCSSPlugins = [
   require('autoprefixer')
 ];
 
+// CONFIG
 class RunAfterCompile {
   apply(compiler) {
     compiler.hooks.done.tap('Copy images', function () {
-      // fse.copySync('./src/assets/images', './dist/assets/images')
       // copy images
       fse.copySync(paths.assets.images, paths.dist.images);
       // copy icons
@@ -33,10 +35,11 @@ class RunAfterCompile {
   }
 }
 
+// CONFIG
 let cssConfig = {
   test: /\.css$/i,
+  // apply multiple loaders and options
   use: [
-    // apply multiple loaders and options
     'css-loader?url=false',
     {
       loader: 'postcss-loader',
@@ -48,6 +51,7 @@ let cssConfig = {
   ]
 };
 
+// CONFIG
 let eslintConfig = {
   test: /\.js$/,
   enforce: 'pre',
@@ -55,29 +59,21 @@ let eslintConfig = {
   use: ['eslint-loader'],
 
 };
-// let eslintConfig = {
-//   test: /\.js$/,
-//   enforce: 'pre',
-//   exclude: /node_modules/,
-//   use: {
-//     loader: 'eslint-loader',
-//   }
-// };
 
-
-
+// CONFIG
 let pages = fse.readdirSync('src').filter(function (file) {
   return file.endsWith('.html');
 }).map(function (page) {
   return new HtmlWebpackPlugin({
     filename: page,
-    // template: `./src/${page}`
     template: `${paths.src}/${page}`
   });
 });
 
 
-// [COMMON CONFIG] -----------------------------------------------------------------------------------------------------------
+/* START COMMON CONFIGURATION
+> > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
+------------------------------------------------------------------------------------------------------------- */
 
 let config = {
 
@@ -86,13 +82,9 @@ let config = {
   // and webpack starts bundling
   // entry: `./src/index.js`, // string | object | array
   entry: {
-    // modernizr: [ paths.head.modernizr ],
-    // vendor: [ paths.vendors.lazyloading, paths.vendors.picturefill, /* paths.vendors.ionicons */ ],
     app: [paths.entry.app],
   },
-
   plugins: pages,
-
   // configuration regarding modules
   module: {
     // rules for modules (configure loaders, parser options, etc.)    
@@ -101,10 +93,9 @@ let config = {
       eslintConfig
     ]
   }
-
 };
 
-// STYLE LINTING
+// STYLE LINTING CONFIG
 config.plugins.push(
   new StyleLintPlugin({
     configFile: '.stylelintrc',
@@ -114,10 +105,15 @@ config.plugins.push(
     failOnError: false,
     quiet: false
   })
-);
+
+); // END COMMON CONFIGURATION 
 
 
-// [DEVELOPMENT MODE CONFIG] -----------------------------------------------------------------------------------------------------------
+
+/* START DEVELOPMENT CONFIGURATION
+> > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
+------------------------------------------------------------------------------------------------------------- */
+
 if (currentTask == 'dev') {
 
   // add loader to start of array
@@ -126,7 +122,6 @@ if (currentTask == 'dev') {
   // options related to how webpack emits results
   config.output = {
     filename: '[name].bundle.js',
-
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)    
     path: path.resolve(__dirname, 'src')
@@ -137,10 +132,7 @@ if (currentTask == 'dev') {
     before: function (app, server) {
       server._watch(`${paths.src}/**/*.html`);
     },
-    // contentBase: path.join(__dirname, '../../src/app'), // boolean | string | array, static file location
-    // contentBase: resolveAbs('./src'),
     contentBase: paths.src,
-
     hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
     port: 3000,
     host: '0.0.0.0',
@@ -150,13 +142,17 @@ if (currentTask == 'dev') {
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
   config.mode = 'development';
 
-  // set devtools
+  // set devtools with source maps
   config.devtool = 'source-map';
 
-}
+} // END DEVELOPMENT CONFIGURATION
 
 
-// [PRODUCTION MODE CONFIG] -----------------------------------------------------------------------------------------------------------
+
+/* START PRODUCTION CONFIGURATION
+> > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
+------------------------------------------------------------------------------------------------------------- */
+
 if (currentTask == 'build') {
 
   // configuration regarding modules  
@@ -167,10 +163,6 @@ if (currentTask == 'build') {
     use: {
       // the loader which should be applied, it'll be resolved relative to the context      
       loader: 'babel-loader',
-      // // options for the loader        
-      // options: {
-      //   presets: ['@babel/preset-env']
-      // }
     }
   });
 
@@ -184,7 +176,6 @@ if (currentTask == 'build') {
   config.output = {
     // the filename template for entry chunks    
     // filename: `[name].[chunkhash].js`,
-
     // chunkFilename: `[name].[chunkhash].js`,
 
     // the target directory for all output files
@@ -198,9 +189,11 @@ if (currentTask == 'build') {
 
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
   config.mode = 'production';
+
   config.optimization = {
     splitChunks: { chunks: 'all' }
   };
+
   config.plugins.push(
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(
@@ -209,16 +202,9 @@ if (currentTask == 'build') {
         filename: 'styles.[chunkhash].css'
       }
     ),
-    // new StyleLintPlugin({
-    //   configFile: '.stylelintrc',
-    //   context: 'src/styles/',
-    //   files: ['**/*.css'],
-    //   // syntax: 'css',
-    //   failOnError: false,
-    //   quiet: false
-    // }),
     new RunAfterCompile()
   );
-}
+} // END PRODUCTION CONFIGURATION
+
 
 module.exports = config;
