@@ -1,14 +1,14 @@
 const currentTask = process.env.npm_lifecycle_event;
+const fse = require('fs-extra')
 
 // PATHS
 const paths = require('./build-utils/webpack/webpack.paths')
 
-
+// PLUGINS
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const fse = require('fs-extra')
 
 
 // POSTCSS PLUGINS
@@ -24,8 +24,8 @@ const postCSSPlugins = [
 class RunAfterCompile {
   apply(compiler) {
     compiler.hooks.done.tap('Copy images', function () {
-      fse.copySync('./src/assets/images', './dist/assets/images')
-      // fse.copySync(paths.assets.images, paths.dist.images)
+      // fse.copySync('./src/assets/images', './dist/assets/images')
+      fse.copySync(paths.assets.images, paths.dist.images)
     })
   }
 }
@@ -50,21 +50,24 @@ let pages = fse.readdirSync('src').filter(function (file) {
 }).map(function (page) {
   return new HtmlWebpackPlugin({
     filename: page,
-    template: `./src/${page}`
+    // template: `./src/${page}`
+    template: `${paths.src}/${page}`
   })
 })
 
+
+// [COMMON CONFIG]
 let config = {
 
   // defaults to ./src
   // Here the application starts executing
   // and webpack starts bundling
-  entry: './src/index.js', // string | object | array
-  // entry: {
-  //   // modernizr: [ paths.head.modernizr ],
-  //   // vendor: [ paths.vendors.lazyloading, paths.vendors.picturefill, /* paths.vendors.ionicons */ ],
-  //   app: ['./src/app/index.js'],
-  // },
+  // entry: `./src/index.js`, // string | object | array
+  entry: {
+    // modernizr: [ paths.head.modernizr ],
+    // vendor: [ paths.vendors.lazyloading, paths.vendors.picturefill, /* paths.vendors.ionicons */ ],
+    app: [paths.entry.app],
+  },
 
   plugins: pages,
 
@@ -76,6 +79,19 @@ let config = {
     ]
   }
 }
+
+// STYLE LINTING
+config.plugins.push(
+  new StyleLintPlugin({
+    configFile: '.stylelintrc',
+    context: 'src/styles/',
+    files: ['**/*.css'],
+    // syntax: 'css',
+    failOnError: false,
+    quiet: false
+  }),
+)
+
 
 // [DEVELOPMENT MODE CONFIG]
 if (currentTask == 'dev') {
@@ -160,14 +176,14 @@ if (currentTask == 'build') {
         filename: `styles.[chunkhash].css`
       }
     ),
-    new StyleLintPlugin({
-      configFile: '.stylelintrc',
-      context: 'src/styles/',
-      files: ['**/*.css'],
-      // syntax: 'css',
-      failOnError: false,
-      quiet: false
-    }),
+    // new StyleLintPlugin({
+    //   configFile: '.stylelintrc',
+    //   context: 'src/styles/',
+    //   files: ['**/*.css'],
+    //   // syntax: 'css',
+    //   failOnError: false,
+    //   quiet: false
+    // }),
     new RunAfterCompile()
   )
 }

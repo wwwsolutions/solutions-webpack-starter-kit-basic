@@ -18,8 +18,6 @@ import StickyHeader from './modules/StickyHeader'
 
 window.addEventListener('load', () => {
 
-  console.warn('\'application.js\' loaded.');
-
   new StickyHeader()
   new RevealOnScroll(document.querySelectorAll(".feature-item"), 75)
   new RevealOnScroll(document.querySelectorAll(".testimonial"), 60)
@@ -44,5 +42,6 @@ window.addEventListener('load', () => {
     module.hot.accept()
   }
 
+  console.warn('\'application.js\' loaded.');
 
 }); // LOAD EVENT LISTENER
