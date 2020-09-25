@@ -1,0 +1,9 @@
+**/node_modules/*
+**/dist/*
+**/build-utils/*
+**/src/assets/*
+**/src/templates/*
+**/src/vendors/*
+**/src/app/functionality/*
+**/temp/*
+
