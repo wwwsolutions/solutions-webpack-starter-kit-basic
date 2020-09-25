@@ -1,4 +1,10 @@
-// [CORE.JS]
+/* INDEX FILE
+//////////////////////////////////////////////*/
+
+console.log('\'index.js\' loaded.');
+
+// [LOAD CORE.JS MODULES]
+// https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md
 // import "core-js/modules/es.array.unscopables.flat";
 // import "core-js/modules/es.array.unscopables.flat-map";
 // import "core-js/modules/esnext.math.clamp";
@@ -9,48 +15,23 @@
 // import "core-js/modules/esnext.math.radians";
 // import "core-js/modules/esnext.math.scale";
 
-// [BABEL PLUGINS]
+// [LOAD BABEL PLUGINS]
+// https://babeljs.io/docs/en/babel-plugin-transform-runtime
 import '@babel/runtime/regenerator';
 
-// [VENDORS]
+// [LOAD THIRD PARTY CODE]
+// https://survivejs.com/webpack/building/bundle-splitting/#:~:text=Webpack%20allows%20you%20to%20split,party%20code%20of%20your%20project.
 import 'lazysizes';
 
-// [STYLES]
-import './styles/styles.css';
+// [LOAD STYLES]
+import './styles/main.css';
 
-// [APPLICATION]
+// [LOAD APP]
 import './app/application';
 
-console.warn('\'index.js\' loaded.');
-
-// [MODULES]
-// import MobileMenu from './app/modules/MobileMenu'
-// import RevealOnScroll from './app/modules/RevealOnScroll'
-// import StickyHeader from './app/modules/StickyHeader'
-
-// [CODE==========================================================]
-
-// new StickyHeader()
-// new RevealOnScroll(document.querySelectorAll(".feature-item"), 75)
-// new RevealOnScroll(document.querySelectorAll(".testimonial"), 60)
-// new MobileMenu();
-// let modal
-
-// document.querySelectorAll(".open-modal").forEach(el => {
-//   el.addEventListener("click", e => {
-//     e.preventDefault()
-//     if (typeof modal == "undefined") {
-//       import(/* webpackChunkName: "modal" */ './app/modules/Modal').then(x => {
-//         modal = new x.default()
-//         setTimeout(() => modal.openTheModal(), 20)
-//       }).catch(() => console.log("There was a problem."))
-//     } else {
-//       modal.openTheModal()
-//     }
-//   })
-// })
-
-// if (module.hot) {
-//   module.hot.accept()
-// }
+// ENABLE HMR
+// https://webpack.js.org/guides/hot-module-replacement/
+if (module.hot) {
+  module.hot.accept();
+}
 

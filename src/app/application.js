@@ -1,15 +1,13 @@
-/* DOCUMENT INFORMATION
-
-  MAIN APPLICATION.
-  IMPORTS MODULES, 
-  APPLICATION INITIALIZATION.
-
+/* MAIN APPLICATION.
 //////////////////////////////////////////////*/
+
+console.log('\'application.js\' loaded.');
 
 // [APPLICATION MODULES]
 import MobileMenu from './modules/MobileMenu';
 import RevealOnScroll from './modules/RevealOnScroll';
 import StickyHeader from './modules/StickyHeader';
+
 
 
 /* APPLICATION INITIALIZATION
@@ -38,10 +36,5 @@ window.addEventListener('load', () => {
     });
   });
 
-  if (module.hot) {
-    module.hot.accept();
-  }
-
-  console.warn('\'application.js\' loaded.');
-
 }); // LOAD EVENT LISTENER
+
