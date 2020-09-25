@@ -12,6 +12,12 @@
     }
   },
   "rules": {
+    "no-async-promise-executor": 0,
+    "no-dupe-else-if": 0,
+    "no-import-assign": 0,
+    "no-misleading-character-class": 0,
+    "no-setter-return": 0,
+    "no-useless-catch": 0,
     "no-console": "off",
     "indent": [
       "error",
@@ -23,7 +29,10 @@
     "linebreak-style": 0,
     "quotes": [
       "error",
-      "single"
+      "single",
+      {
+        "allowTemplateLiterals": true
+      }
     ],
     "semi": [
       "error",

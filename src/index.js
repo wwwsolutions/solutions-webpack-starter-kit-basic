@@ -1,4 +1,4 @@
-/* INDEX FILE
+/* ROOT FILE
 //////////////////////////////////////////////*/
 
 console.log('\'index.js\' loaded.');
@@ -34,4 +34,5 @@ import './app/application';
 if (module.hot) {
   module.hot.accept();
 }
+
 
