@@ -3,6 +3,7 @@
   "extends": "stylelint-config-standard",
   "plugins": [  ],
   "rules": {
+    "no-eol-whitespace": null,
     "indentation": 2,
     "declaration-empty-line-before": null,
     "no-invalid-double-slash-comments": null,
@@ -60,6 +61,6 @@
     ],
     "number-leading-zero": null,
     "length-zero-no-unit": null,
-    "unit-whitelist": ["em", "rem", "s", "px", "%", "vw", "vh", "ms", "fr", "deg", "x", "dpi"],
+    "unit-allowed-list": ["em", "rem", "s", "px", "%", "vw", "vh", "ms", "fr", "deg", "x", "dpi"],
   }
 }

@@ -1,14 +1,10 @@
-/* OPTIONAL ///////////////////////////////////////////////////////////////////////////////////////////
+/* OPTIONAL 
 
 gulp task: sprites-generator (build-utils/gulp/tasks/task-sprites-generator)
-description:
-    Generates sprites and png for icons from
 
-/                                                                                                     /
-/  > GENERATED                                                                                        /
-/  [AUTOMATICALLY GENERATED STYLESHEETS FOR ICONS SPRITE VIA GULP TASK.]                              /
-/  GULP:SPRITES                                                                                       /
-/                                                                                                     /
+description:
+    Generates sprites and png to use as inline svg.
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////*/
 @import "generated/_sprite";
 

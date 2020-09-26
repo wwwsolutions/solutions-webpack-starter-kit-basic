@@ -45,6 +45,8 @@ let cssConfig = {
       loader: 'postcss-loader',
       // options for the loader
       options: {
+        // enable scss parser rosupport for slash (//) comments in styles
+        // parser: `postcss-scss`,
         plugins: postCSSPlugins
       }
     }
