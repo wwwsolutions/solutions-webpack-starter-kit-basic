@@ -1,7 +1,7 @@
 {
   "name": "solutions-starter-kit-basic",
   "author": "Domagoj-Mario Mendas",
-  "description": "A Basic Starter/Boilerplate Powered by Webpack",
+  "description": "A basic starter/boilerplate powered by Webpack",
   "version": "1.0.0",
   "keywords": [
     "node",
