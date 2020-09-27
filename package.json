@@ -14,7 +14,9 @@
     "gulp",
     "sprites",
     "modernizr",
-    "ES6+"
+    "ES6+",
+    "lodash",
+    "ramda"
   ],
   "repository": "https://github.com/wwwsolutions/solutions-starter-kit-basic",
   "private": true,
@@ -32,7 +34,8 @@
     "core-js": "^3.6.5",
     "lazysizes": "^5.2.2",
     "lodash": "^4.17.20",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "ramda": "^0.27.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
