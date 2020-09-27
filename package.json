@@ -1,7 +1,7 @@
 {
-  "name": "solutions-webpack-starter-kit-basic",
+  "name": "solutions-starter-kit-basic",
   "author": "Domagoj-Mario Mendas",
-  "description": "A Webpack starter/boilerplate",
+  "description": "A Basic Starter/Boilerplate Powered by Webpack",
   "version": "1.0.0",
   "keywords": [
     "node",
@@ -13,9 +13,11 @@
     "eslint",
     "gulp",
     "sprites",
-    "modernizr"
+    "modernizr",
+    "ES6+"
   ],
-  "repository": "https://github.com/wwwsolutions/solutions-webpack-starter-kit-basic",
+  "repository": "https://github.com/wwwsolutions/solutions-starter-kit-basic",
+  "private": true,
   "license": "Apache-2.0",
   "scripts": {
     "gulp": "./node_modules/gulp/bin/gulp.js",
